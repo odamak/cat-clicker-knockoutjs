@@ -5,10 +5,13 @@
     <title>Cat Clicker</title>
 </head>
 <body>
-
         <h2 data-bind="text: name"></h2>
+        <div data-bind="text: level"></div>
         <div data-bind="text: clickCount"></div>
         <img src="" alt="cute cat" data-bind="click: incrementCounter, attr: {src: imgSrc}">
+        <ul data-bind="foreach: nicknames">
+            <li data-bind="text: nicknames.nickname"></li>
+        </ul>
 
     </div>
     <script src="js/lib/knockout-3.2.0.js"></script>
