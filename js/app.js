@@ -4,11 +4,13 @@ var ViewModel = function() {
     this.imgSrc = ko.observable('img/cat_picture0.jpeg');
     this.imgAttribution = ko.observable('https://www.flickr.com/photos');
 
-    this.nicknames = ko.observableArray ([  {nickname: 'titi'},
-                                            {nickname: 'toutou'},
-                                            {nickname: 'tata'},
-                                            {nickname: 'tutu'},
-                                            {nickname: 'tonton'}]);
+    this.nicknames = ko.observableArray ([  
+        { nickname: 'titi'},
+        { nickname: 'toutou'},
+        { nickname: 'tata'},
+        { nickname: 'tutu'},
+        { nickname: 'tonton'}
+    ]);
 
     this.incrementCounter = function() {
         this.clickCount(this.clickCount() + 1);

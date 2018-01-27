@@ -9,8 +9,9 @@
         <div data-bind="text: level"></div>
         <div data-bind="text: clickCount"></div>
         <img src="" alt="cute cat" data-bind="click: incrementCounter, attr: {src: imgSrc}">
+        <h2>Nicknames</h2>
         <ul data-bind="foreach: nicknames">
-            <li data-bind="text: nicknames.nickname"></li>
+            <li data-bind="text: nickname"></li>
         </ul>
 
     </div>
