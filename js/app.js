@@ -1,4 +1,43 @@
+let initialCats = [
+{
+    clickCount : 0,
+    name : 'Tabby',
+    imgSrc : 'img/434164568_fea0ad4013_z.jpg',
+    imgAttribution : 'https://www.flickr.com/photos/bigtallguy/434164568',
+    nicknames : ['titi','toutou','tata','tutu','tonton']
+},
+{
+    clickCount : 0,
+    name : 'Tiger',
+    imgSrc : 'img/4154543904_6e2428c421_z.jpg',
+    imgAttribution : 'https://www.flickr.com/photos/xshamx/4154543904',
+    nicknames : ['tigi','toutou','tata','tutu','tonton']
+},
+{
+    clickCount : 0,
+    name : 'Scaredy',
+    imgSrc : 'img/22252709_010df3379e_z.jpg',
+    imgAttribution : 'https://www.flickr.com/photos/kpjas/22252709',
+    nicknames : ['scary','toutou','tata','tutu','tonton']
+},
+{
+    clickCount : 0,
+    name : 'Shadow',
+    imgSrc : 'img/1413379559_412a540d29_z.jpg',
+    imgAttribution : 'https://www.flickr.com/photos/malfet/1413379559',
+    nicknames : ['shady','toutou','tata','tutu','tonton']
+},
+{
+    clickCount : 0,
+    name : 'Sleepy',
+    imgSrc : 'img/9648464288_2516b35537_z.jpg',
+    imgAttribution : 'https://www.flickr.com/photos/onesharp/9648464288',
+    nicknames : ['sleepsleep','toutou','tata','tutu','tonton']
+}
+];
+
 let Cat = function(data) {
+    self = this;
     this.clickCount = ko.observable(data.clickCount);
     this.name = ko.observable(data.name);
     this.imgSrc = ko.observable(data.imgSrc);
@@ -7,7 +46,7 @@ let Cat = function(data) {
 
     this.title = ko.computed(function(){
         let title;
-        let clicks = this.clickCount();
+        let clicks = self.clickCount();
         if (clicks < 5) {
             title = 'Newborn';
         } else if (clicks < 10) {
@@ -22,21 +61,24 @@ let Cat = function(data) {
             title = 'Ninja';
         }
         return title;
-    },this)
+    })
     
 }
+
+// Make the cats show up in a list (html + bindings)
+// Make the cats clickable (function to set new currentCat)
 
 let ViewModel = function() {
 
     let self = this;
-    this.currentCat = ko.observable(new Cat({
-            clickCount : 0,
-            name : 'Tabby',
-            imgSrc : 'img/cat_picture0.jpeg',
-            imgAttribution : 'https://www.flickr.com/photos',
-            nicknames : ['titi','toutou','tata','tutu','tonton']
-        })
-    );
+    this.catList = ko.observableArray([]);
+
+    initialCats.forEach(function(catItem){
+        self.catList.push( new Cat(catItem) );
+    })
+
+    self.currentCat = ko.observable(this.catList()[0]);
+
     this.incrementCounter = function() {
         // originally the instruction of code * was:
         // this.currentCat().clickCount(this.currentCat().clickCount()+1 )
@@ -60,6 +102,12 @@ let ViewModel = function() {
         //Then, no matter from where the function gets called, self will point out
         //to the same object, and we don't need to make any change
     };
+
+    this.setNewCurrentCat = function(clickedCat){
+        console.log(clickedCat);
+        self.currentCat(clickedCat);
+        
+    } 
 
 }
 
