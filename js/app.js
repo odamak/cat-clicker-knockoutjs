@@ -1,6 +1,6 @@
-let initialCats = [
+var initialCats = [
 {
-    clickCount : 0,
+    clickCount : 0,  
     name : 'Tabby',
     imgSrc : 'img/434164568_fea0ad4013_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/bigtallguy/434164568',
@@ -29,6 +29,7 @@ let initialCats = [
 },
 {
     clickCount : 0,
+    title: null,
     name : 'Sleepy',
     imgSrc : 'img/9648464288_2516b35537_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/onesharp/9648464288',
@@ -36,17 +37,17 @@ let initialCats = [
 }
 ];
 
-let Cat = function(data) {
-    self = this;
+var Cat = function(data) {
     this.clickCount = ko.observable(data.clickCount);
     this.name = ko.observable(data.name);
     this.imgSrc = ko.observable(data.imgSrc);
     this.imgAttribution = ko.observable(data.imgAttribution);
     this.nicknames = ko.observableArray (data.nicknames);
+    this.title = null;
 
     this.title = ko.computed(function(){
-        let title;
-        let clicks = self.clickCount();
+        var title;
+        var clicks = this.clickCount();
         if (clicks < 5) {
             title = 'Newborn';
         } else if (clicks < 10) {
@@ -61,25 +62,28 @@ let Cat = function(data) {
             title = 'Ninja';
         }
         return title;
-    })
+    },this)
     
 }
 
 // Make the cats show up in a list (html + bindings)
 // Make the cats clickable (function to set new currentCat)
 
-let ViewModel = function() {
+var ViewModel = function() {
 
-    let self = this;
+    var self = this;
     this.catList = ko.observableArray([]);
+
+    this.initialCats = initialCats;
 
     initialCats.forEach(function(catItem){
         self.catList.push( new Cat(catItem) );
     })
 
     self.currentCat = ko.observable(this.catList()[0]);
+    self.currentCat().clickCount(self.currentCat().clickCount()+1)
 
-    this.incrementCounter = function() {
+    self.incrementCounter = function() {
         // originally the instruction of code * was:
         // this.currentCat().clickCount(this.currentCat().clickCount()+1 )
         // we delete currentCat() when calling clickCount in the following statement
@@ -97,14 +101,17 @@ let ViewModel = function() {
         // and keep the same instruction stated in code ** replacing "this" 
         // by "self" as follows:
         // (beginning of code *)
+        console.log("operation !!!!");
+        console.log(self.currentCat());
+        console.log(self.currentCat().clickCount());
         self.currentCat().clickCount(self.currentCat().clickCount()+1)
         // (end of code *)
         //Then, no matter from where the function gets called, self will point out
         //to the same object, and we don't need to make any change
     };
 
-    this.setNewCurrentCat = function(clickedCat){
-        console.log(clickedCat);
+    self.setNewCurrentCat = function(clickedCat){
+        console.log("clicked cat is "+clickedCat);
         self.currentCat(clickedCat);
         
     } 
