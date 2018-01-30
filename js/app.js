@@ -4,28 +4,28 @@ var initialCats = [
     name : 'Tabby',
     imgSrc : 'img/434164568_fea0ad4013_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/bigtallguy/434164568',
-    nicknames : ['titi','toutou','tata','tutu','tonton']
+    nicknames : ['titi','tutu']
 },
 {
     clickCount : 0,
     name : 'Tiger',
     imgSrc : 'img/4154543904_6e2428c421_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/xshamx/4154543904',
-    nicknames : ['tigi','toutou','tata','tutu','tonton']
+    nicknames : ['tigi']
 },
 {
     clickCount : 0,
     name : 'Scaredy',
     imgSrc : 'img/22252709_010df3379e_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/kpjas/22252709',
-    nicknames : ['scary','toutou','tata','tutu','tonton']
+    nicknames : ['scary']
 },
 {
     clickCount : 0,
     name : 'Shadow',
     imgSrc : 'img/1413379559_412a540d29_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/malfet/1413379559',
-    nicknames : ['shady','toutou','tata','tutu','tonton']
+    nicknames : ['shady']
 },
 {
     clickCount : 0,
@@ -33,7 +33,7 @@ var initialCats = [
     name : 'Sleepy',
     imgSrc : 'img/9648464288_2516b35537_z.jpg',
     imgAttribution : 'https://www.flickr.com/photos/onesharp/9648464288',
-    nicknames : ['sleepsleep','toutou','tata','tutu','tonton']
+    nicknames : ['sleepsleep','zzzz']
 }
 ];
 
@@ -101,9 +101,6 @@ var ViewModel = function() {
         // and keep the same instruction stated in code ** replacing "this" 
         // by "self" as follows:
         // (beginning of code *)
-        console.log("operation !!!!");
-        console.log(self.currentCat());
-        console.log(self.currentCat().clickCount());
         self.currentCat().clickCount(self.currentCat().clickCount()+1)
         // (end of code *)
         //Then, no matter from where the function gets called, self will point out
